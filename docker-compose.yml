@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+  lsup-msgq:
+    image: rabbitmq:management-alpine
+    volumes:
+      - ${PWD}/etc/rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins
+
+  lsup-repo:
+    image: scossu/lakesuperior:stable
+    volumes:
+      - lakesuperior:/data
+      - ./etc/lsup:/etc/lsup
+    environment:
+      FCREPO_CONFIG_DIR: /etc/lsup
+    depends_on:
+      - "lsup-msgq"
+
+  lsup-www:
+    container_name: lsup_www
+    image: nginx:stable-alpine
+    volumes:
+      - ./etc/nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - "lsup-repo"
+    ports:
+      - "80:80"
+      - "443:443"
+
+volumes:
+  lakesuperior:
+
