@@ -1,7 +1,7 @@
 # Lakesuperior Docker environment
 
 This repository contains a production-oriented
-[Lakesuperior](https://lakesuperior.readhthedocs.io) Docker environment,
+[Lakesuperior](https://lakesuperior.readthedocs.io) Docker environment,
 complete with a message broker (RabbitMQ) and a web server (Nginx).
 
 ## Quick Start
